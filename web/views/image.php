@@ -5,4 +5,4 @@
  * Date: 10/26/16
  * Time: 11:19
  */
-ench "<img src=\"../../images/panda.jpg\">"
+echo "<img src=\"../../images/panda.jpg\">"
