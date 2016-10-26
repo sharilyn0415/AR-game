@@ -24,3 +24,4 @@
 //
 //$app->run();
 echo "Hello world";
+echo "<a href='views/image.php' >";
