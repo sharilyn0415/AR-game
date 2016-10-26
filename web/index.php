@@ -24,4 +24,3 @@
 //
 //$app->run();
 echo "Hello world";
-echo '<img src="../images/panda.jpg">';
