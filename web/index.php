@@ -23,4 +23,17 @@
 //});
 //
 //$app->run();
+include('header.php');
+
 echo "Hello world";
+
+$sql = "SELECT * FROM locations";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo $row;
+        echo "<br />";
+    }
+}
+
+include('footer.php');
