@@ -31,9 +31,11 @@ $sql = "SELECT * FROM locations";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        echo $row;
         echo "<br />";
+        echo $row["longtitude"];
+        echo "<br />";
+        echo $row["latitude"];
     }
 }
 
-include('footer.php');
+include('header.php');
