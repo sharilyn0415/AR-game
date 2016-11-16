@@ -25,7 +25,16 @@
 //$app->run();
 include('header.php');
 
-echo "Hello world";
+$longtitude = $_GET["longtitude"];
+$latitude = $_GET["latitude"];
+
+if ($longtitude == "" || $latitude == "") {
+    echo "Missing longtitude and latitude";
+    return;
+}
+
+echo $longtitude;
+echo $latitude;
 
 $sql = "SELECT * FROM locations";
 $result = $conn->query($sql);
