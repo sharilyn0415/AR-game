@@ -26,10 +26,10 @@
 include('header.php');
 include('mylib.php');
 
-$longtitude = $_GET["longitude"];
+$longitude = $_GET["longitude"];
 $latitude = $_GET["latitude"];
 
-if ($longtitude == "" || $latitude == "") {
+if ($longitude == "" || $latitude == "") {
     echo "Missing longitude and latitude";
     return;
 }
