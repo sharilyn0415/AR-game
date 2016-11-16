@@ -34,9 +34,6 @@ if ($longtitude == "" || $latitude == "") {
     return;
 }
 
-echo $longtitude;
-echo $latitude;
-
 $sql = "SELECT * FROM locations";
 $res = [];
 $res['status'] = '0';
@@ -53,11 +50,6 @@ if ($result->num_rows > 0) {
             $res['status'] = '2';
             break;
         }
-
-//        echo "<br />";
-//        echo $row["longtitude"];
-//        echo "<br />";
-//        echo $row["latitude"];
     }
 }
 
