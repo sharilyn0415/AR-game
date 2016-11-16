@@ -26,11 +26,11 @@
 include('header.php');
 include('mylib.php');
 
-$longtitude = $_GET["longtitude"];
+$longtitude = $_GET["longitude"];
 $latitude = $_GET["latitude"];
 
 if ($longtitude == "" || $latitude == "") {
-    echo "Missing longtitude and latitude";
+    echo "Missing longitude and latitude";
     return;
 }
 
@@ -42,11 +42,11 @@ $res['url'] = '';
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        if (distance(floatval($latitude), floatval($longtitude), floatval($row["latitude"]), floatval($row["longtitude"]), 'M') < 0.01) {
+        if (distance(floatval($latitude), floatval($longitude), floatval($row["latitude"]), floatval($row["longitude"]), 'M') < 0.01) {
             $res['status'] = '1';
             $res['url'] = $row["url"];
             break;
-        } elseif (distance(floatval($latitude), floatval($longtitude), floatval($row["latitude"]), floatval($row["longtitude"]), 'M') < 0.1) {
+        } elseif (distance(floatval($latitude), floatval($longitude), floatval($row["latitude"]), floatval($row["longitude"]), 'M') < 0.1) {
             $res['status'] = '2';
             break;
         }
