@@ -34,7 +34,7 @@
 
 <body onload="loadData()">
 		<div id="body">
-			<h1>Manage System</h1>
+			<h1>Admin System <a class='btn btn-primary btn-xs' href='add.html'>Add coordinates</a></h1>
 			<table id="data" class="table table-hover"></table >
 		</div>
 </body>
