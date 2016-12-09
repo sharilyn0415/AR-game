@@ -5,7 +5,7 @@
 		$stmt->bind_param("sssi", $_POST['longitude'], $_POST['latitude'], $_POST['url'], $_POST['id']);
 
 		if ($stmt->execute() == TRUE) {
-		    header( 'Location: ../admin.php' );
+		    header( 'Location: ../admin.php#database' );
 		} else {
 		    echo "Error: " . $sql . "<br>" . $conn->error;
 		}

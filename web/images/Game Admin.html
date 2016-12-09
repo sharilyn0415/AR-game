@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://localhost/ar-game/web/admin.php -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div{font-weight:400}</style><link type="text/css" rel="stylesheet" href="./Game Admin_files/css"><style type="text/css">.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div{font-size:10px}</style><style type="text/css">@media print {  .gm-style .gmnoprint, .gmnoprint {    display:none  }}@media screen {  .gm-style .gmnoscreen, .gmnoscreen {    display:none  }}</style><style type="text/css">.gm-style{font-family:Roboto,Arial,sans-serif;font-size:11px;font-weight:400;text-decoration:none}.gm-style img{max-width:none}</style>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Admin</title>
+    <link href="./Game Admin_files/bootstrap.min.css" rel="stylesheet" type="text/css">    
+    <link href="./Game Admin_files/style.css" rel="stylesheet">
+	<!-- <link href="color/default.css" rel="stylesheet">  -->
+	<script>
+		var loadData = function() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if(xhttp.readyState == 4 && xhttp.status == 200) {
+					if(xhttp.responseText == "") {
+						return;
+					}
+					var coordinates = JSON.parse(xhttp.responseText);
+					if(coordinates.length == 0) {
+						var res = "<th>There is No pre-set coordinates in DB!<th>";
+					} else {
+						var res = "<tr><th>ID</th><th>Longitude</th><th>Latitude</th><th>URL</th><th></th><th></th></tr>";
+						var urls ="<option type='radio' name='url' value='' selected>--- Please Select URL From List ---</option>"
+						for(var i = 0; i < coordinates.length; i++) {
+							res += "<tr><td>"+coordinates[i].id+"</td><td>"+coordinates[i].longitude+"</td><td>"+coordinates[i].latitude+"</td><td>"+coordinates[i].url+"</td><td><a class='btn btn-primary btn-xs' href='edit.php?id="+coordinates[i].id+"'>Edit</a></td><td><form method='POST' action='services/delete.php'><input type='hidden' name='id' value="+coordinates[i].id+" /><input class='btn btn-primary btn-xs' type='submit' value='Delete' /></form></td></tr>";
+							if(coordinates[i].url != ""){
+								urls +="<option type='radio' name='url' value='"+coordinates[i].url+"' >"+coordinates[i].url+"</option><br>"
+							}
+						}
+					}
+					document.getElementById("data").innerHTML = res;
+					document.getElementById("urls").innerHTML = urls;
+			    }
+			};
+			xhttp.open("GET", "services/admin.php", true);
+			xhttp.send();
+		}
+	</script>  
+<script type="text/javascript" charset="UTF-8" src="./Game Admin_files/common.js"></script><script type="text/javascript" charset="UTF-8" src="./Game Admin_files/map.js"></script><script type="text/javascript" charset="UTF-8" src="./Game Admin_files/util.js"></script><script type="text/javascript" charset="UTF-8" src="./Game Admin_files/onion.js"></script><script type="text/javascript" charset="UTF-8" src="./Game Admin_files/stats.js"></script><script type="text/javascript" charset="UTF-8" src="./Game Admin_files/controls.js"></script><script type="text/javascript" charset="UTF-8" src="./Game Admin_files/marker.js"></script></head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom" onload="loadData()">
+	<!-- Preloader -->
+	<div id="preloader" style="display: none;">
+	  <div id="load" style="display: none;"></div>
+	</div>
+
+    <nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="http://localhost/ar-game/web/admin.php">
+                    <h1>Jewel Hunt -“Try your luck !”</h1>
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="http://localhost/ar-game/web/admin.php#intro">Home</a></li>
+        <li class=""><a href="http://localhost/ar-game/web/admin.php#about">About</a></li>
+        <li class=""><a href="http://localhost/ar-game/web/admin.php#addbymap">Add by map</a></li>
+		<li class=""><a href="http://localhost/ar-game/web/admin.php#database">Database</a></li>
+      </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="intro" class="intro" style="background">
+		<div class="slogan">
+			<h2>Jewel Hunt</h2>
+			<h4>Cloud based Gaming App with Augmented Reality</h4>
+		</div>
+		<div class="page-scroll">
+			<a href="http://localhost/ar-game/web/admin.php#addbymap" class="btn btn-circle">
+				<i class="fa fa-angle-double-down animated"></i>
+			</a>
+		</div>
+    </section>
+
+    <section id="about" class="home-section text-center">
+		<div class="heading-about">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2">
+						<div class="wow bounceInDown animated" data-wow-delay="0.4s" style="visibility: visible;-webkit-animation-delay: 0.4s; -moz-animation-delay: 0.4s; animation-delay: 0.4s;">
+						<div class="section-heading">
+						<h2>About us</h2>
+						<i class="fa fa-2x fa-angle-down"></i>
+
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-2 col-lg-offset-5">
+					<hr class="marginbot-50">
+				</div>
+			</div>
+        	<div class="row">
+	            <div class="col-md-3">
+					<div class="wow bounceInUp animated" data-wow-delay="0.2s" style="visibility: visible;-webkit-animation-delay: 0.2s; -moz-animation-delay: 0.2s; animation-delay: 0.2s;">
+		                <div class="team boxed-grey">
+		                    <div class="inner">
+								<h5>Monika Khanna</h5>
+		                        <p class="subtitle">IOS Developer</p>
+		                        <div class="avatar"><img src="./Game Admin_files/monika.jpg" alt="" class="img-responsive img-circle"></div>
+		                    </div>
+		                </div>
+					</div>
+	            </div>
+				<div class="col-md-3">
+					<div class="wow bounceInUp animated" data-wow-delay="0.5s" style="visibility: visible;-webkit-animation-delay: 0.5s; -moz-animation-delay: 0.5s; animation-delay: 0.5s;">
+		                <div class="team boxed-grey">
+		                    <div class="inner">
+								<h5>Sunyin Yao</h5>
+		                        <p class="subtitle">Backend Developer</p>
+		                        <div class="avatar"><img src="./Game Admin_files/sunyin.jpg" alt="" class="img-responsive img-circle" style="
+    height: 50px;
+"></div>
+
+		                    </div>
+		                </div>
+					</div>
+	            </div>
+				<div class="col-md-3">
+					<div class="wow bounceInUp animated" data-wow-delay="0.8s" style="visibility: visible;-webkit-animation-delay: 0.8s; -moz-animation-delay: 0.8s; animation-delay: 0.8s;">
+		                <div class="team boxed-grey">
+		                    <div class="inner">
+								<h5>Madhukarreddy Komalla</h5>
+		                        <p class="subtitle">Android Developer</p>
+		                        <div class="avatar"><img src="./Game Admin_files/madhu.jpg" alt="" class="img-responsive img-circle"></div>
+		                    </div>
+		                </div>
+					</div>
+	            </div>
+				<div class="col-md-3">
+					<div class="wow bounceInUp animated" data-wow-delay="1s" style="visibility: visible;-webkit-animation-delay: 1s; -moz-animation-delay: 1s; animation-delay: 1s;">
+		                <div class="team boxed-grey">
+		                    <div class="inner">
+								<h5>Teng Wang</h5>
+		                        <p class="subtitle">Project Manager</p>
+		                        <div class="avatar"><img src="./Game Admin_files/teng.jpg" alt="" class="img-responsive img-circle"></div>
+		                    </div>
+		                </div>
+					</div>
+	            </div>
+        	</div>		
+		</div>
+	</section>
+			
+    <section id="addbymap" class="home-section text-center">
+		<div class="heading-contact">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2">
+						<div class="wow bounceInDown animated" data-wow-delay="0.4s" style="visibility: visible;-webkit-animation-delay: 0.4s; -moz-animation-delay: 0.4s; animation-delay: 0.4s;">
+							<div class="section-heading">
+								<h2>Add by marking on map</h2>
+								<i class="fa fa-2x fa-angle-down"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row" style="padding:10px;margin:10px">
+			<div class="col-md-8">
+				<div id="map" style="position: relative; overflow: hidden;"><div style="height: 100%; width: 100%; position: absolute; background-color: rgb(229, 227, 223);"><div class="gm-style" style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;) 8 8, default;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="width: 256px; height: 256px; position: absolute; left: 67px; top: 172px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 323px; top: 172px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 323px; top: -84px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 67px; top: -84px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 67px; top: 428px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 323px; top: 428px;"></div><div style="width: 256px; height: 256px; position: absolute; left: -189px; top: 172px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 579px; top: 172px;"></div><div style="width: 256px; height: 256px; position: absolute; left: -189px; top: 428px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 579px; top: -84px;"></div><div style="width: 256px; height: 256px; position: absolute; left: -189px; top: -84px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 579px; top: 428px;"></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: -1;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 67px; top: 172px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 323px; top: 172px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 323px; top: -84px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 67px; top: -84px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 67px; top: 428px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 323px; top: 428px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -189px; top: 172px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 579px; top: 172px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -189px; top: 428px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 579px; top: -84px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -189px; top: -84px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 579px; top: 428px;"></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="position: absolute; left: 323px; top: 172px; transition: opacity 200ms ease-out;"><img src="./Game Admin_files/vt" draggable="false" alt="" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 67px; top: 172px; transition: opacity 200ms ease-out;"><img src="./Game Admin_files/vt(1)" draggable="false" alt="" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 67px; top: 428px; transition: opacity 200ms ease-out;"><img src="./Game Admin_files/vt(2)" draggable="false" alt="" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 323px; top: -84px; transition: opacity 200ms ease-out;"><img src="./Game Admin_files/vt(3)" draggable="false" alt="" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 67px; top: -84px; transition: opacity 200ms ease-out;"><img src="./Game Admin_files/vt(4)" draggable="false" alt="" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -189px; top: 428px; transition: opacity 200ms ease-out;"><img src="./Game Admin_files/vt(5)" draggable="false" alt="" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -189px; top: 172px; transition: opacity 200ms ease-out;"><img src="./Game Admin_files/vt(6)" draggable="false" alt="" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 579px; top: -84px; transition: opacity 200ms ease-out;"><img src="./Game Admin_files/vt(7)" draggable="false" alt="" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 323px; top: 428px; transition: opacity 200ms ease-out;"><img src="./Game Admin_files/vt(8)" draggable="false" alt="" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 579px; top: 172px; transition: opacity 200ms ease-out;"><img src="./Game Admin_files/vt(9)" draggable="false" alt="" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 579px; top: 428px; transition: opacity 200ms ease-out;"><img src="./Game Admin_files/vt(10)" draggable="false" alt="" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -189px; top: -84px; transition: opacity 200ms ease-out;"><img src="./Game Admin_files/vt(11)" draggable="false" alt="" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 2; width: 100%; height: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 3; width: 100%; height: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 4; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div></div></div><div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a target="_blank" href="https://maps.google.com/maps?ll=37.38,-121.93&amp;z=8&amp;t=m&amp;hl=en-US&amp;gl=US&amp;mapclient=apiv3" title="Click to see this area on Google Maps" style="position: static; overflow: visible; float: none; display: inline;"><div style="width: 66px; height: 26px; cursor: pointer;"><img src="./Game Admin_files/google4.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></a></div><div style="background-color: white; padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none; width: 256px; height: 148px; position: absolute; left: 249px; top: 160px;"><div style="padding: 0px 0px 10px; font-size: 16px;">Map Data</div><div style="font-size: 13px;">Map data ©2016 Google</div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000; cursor: pointer;"><img src="./Game Admin_files/mapcnt6.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div><div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 71px; bottom: 0px; width: 121px;"><div draggable="false" class="gm-style-cc" style="user-select: none; height: 14px; line-height: 14px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a style="color: rgb(68, 68, 68); text-decoration: none; cursor: pointer; display: none;">Map Data</a><span>Map data ©2016 Google</span></div></div></div><div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;"><div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">Map data ©2016 Google</div></div><div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a href="https://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank" style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">Terms of Use</a></div></div><div style="cursor: pointer; width: 25px; height: 25px; overflow: hidden; display: none; margin: 10px 14px; position: absolute; top: 0px; right: 0px;"><img src="./Game Admin_files/sv9.png" draggable="false" class="gm-fullscreen-control" style="position: absolute; left: -52px; top: -86px; width: 164px; height: 175px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></div><div draggable="false" class="gm-style-cc" style="user-select: none; height: 14px; line-height: 14px; display: none; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a target="_new" title="Report errors in the road map or imagery to Google" href="https://www.google.com/maps/@37.38,-121.93,8z/data=!10m1!1e1!12b1?source=apiv3&amp;rapsrc=apiv3" style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); text-decoration: none; position: relative;">Report a map error</a></div></div><div class="gmnoprint gm-bundled-control gm-bundled-control-on-bottom" draggable="false" controlwidth="28" controlheight="93" style="margin: 10px; user-select: none; position: absolute; bottom: 107px; right: 28px;"><div class="gmnoprint" controlwidth="28" controlheight="55" style="position: absolute; left: 0px; top: 38px;"><div draggable="false" style="user-select: none; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; background-color: rgb(255, 255, 255); width: 28px; height: 55px;"><div title="Zoom in" style="position: relative; width: 28px; height: 27px; left: 0px; top: 0px;"><div style="overflow: hidden; position: absolute; width: 15px; height: 15px; left: 7px; top: 6px;"><img src="./Game Admin_files/tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></div><div style="position: relative; overflow: hidden; width: 67%; height: 1px; left: 16%; background-color: rgb(230, 230, 230); top: 0px;"></div><div title="Zoom out" style="position: relative; width: 28px; height: 27px; left: 0px; top: 0px;"><div style="overflow: hidden; position: absolute; width: 15px; height: 15px; left: 7px; top: 6px;"><img src="./Game Admin_files/tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: -15px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></div></div></div><div class="gm-svpc" controlwidth="28" controlheight="28" style="background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-radius: 2px; width: 28px; height: 28px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;) 8 8, default; position: absolute; left: 0px; top: 0px;"><div style="position: absolute; left: 1px; top: 1px;"></div><div style="position: absolute; left: 1px; top: 1px;"><div aria-label="Street View Pegman Control" style="width: 26px; height: 26px; overflow: hidden; position: absolute; left: 0px; top: 0px;"><img src="./Game Admin_files/cb_scout5.png" draggable="false" style="position: absolute; left: -147px; top: -26px; width: 215px; height: 835px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div aria-label="Pegman is on top of the Map" style="width: 26px; height: 26px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./Game Admin_files/cb_scout5.png" draggable="false" style="position: absolute; left: -147px; top: -52px; width: 215px; height: 835px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div aria-label="Street View Pegman Control" style="width: 26px; height: 26px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./Game Admin_files/cb_scout5.png" draggable="false" style="position: absolute; left: -147px; top: -78px; width: 215px; height: 835px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div><div class="gmnoprint" controlwidth="28" controlheight="0" style="display: none; position: absolute;"><div title="Rotate map 90 degrees" style="width: 28px; height: 28px; overflow: hidden; position: absolute; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; cursor: pointer; background-color: rgb(255, 255, 255); display: none;"><img src="./Game Admin_files/tmapctrl4.png" draggable="false" style="position: absolute; left: -141px; top: 6px; width: 170px; height: 54px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div class="gm-tilt" style="width: 28px; height: 28px; overflow: hidden; position: absolute; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; top: 0px; cursor: pointer; background-color: rgb(255, 255, 255);"><img src="./Game Admin_files/tmapctrl4.png" draggable="false" style="position: absolute; left: -141px; top: -13px; width: 170px; height: 54px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div><div class="gmnoprint" style="margin: 10px; z-index: 0; position: absolute; cursor: pointer; left: 0px; top: 0px;"><div class="gm-style-mtc" style="float: left;"><div draggable="false" title="Show street map" style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 8px; border-bottom-left-radius: 2px; border-top-left-radius: 2px; -webkit-background-clip: padding-box; background-clip: padding-box; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; min-width: 22px; font-weight: 500;">Map</div><div style="background-color: white; z-index: -1; padding: 2px; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; position: absolute; left: 0px; top: 31px; text-align: left; display: none;"><div draggable="false" title="Show street map with terrain" style="color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 6px 8px 6px 6px; direction: ltr; text-align: left; white-space: nowrap;"><span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(198, 198, 198); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle;"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden; display: none;"><img src="./Game Admin_files/imgs8.png" draggable="false" style="position: absolute; left: -52px; top: -44px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 68px; height: 67px;"></div></span><label style="vertical-align: middle; cursor: pointer;">Terrain</label></div></div></div><div class="gm-style-mtc" style="float: left;"><div draggable="false" title="Show satellite imagery" style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(86, 86, 86); font-family: Roboto, Arial, sans-serif; user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 8px; border-bottom-right-radius: 2px; border-top-right-radius: 2px; -webkit-background-clip: padding-box; background-clip: padding-box; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-left: 0px; min-width: 40px;">Satellite</div><div style="background-color: white; z-index: -1; padding: 2px; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; position: absolute; right: 0px; top: 31px; text-align: left; display: none;"><div draggable="false" title="Show imagery with street names" style="color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 6px 8px 6px 6px; direction: ltr; text-align: left; white-space: nowrap;"><span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(198, 198, 198); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle;"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden;"><img src="./Game Admin_files/imgs8.png" draggable="false" style="position: absolute; left: -52px; top: -44px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 68px; height: 67px;"></div></span><label style="vertical-align: middle; cursor: pointer;">Labels</label></div></div></div></div></div></div></div>
+			</div>
+    		<div class="col-md-4">
+		    	<form class="form-group" method="POST" action="http://localhost/ar-game/web/services/create.php">
+			    	<h3>Your Select location</h3>
+		    		Longitude: <input class="form-control" type="text" name="longitude" id="lng" value=""><br>
+		    		Latitude: <input class="form-control" type="text" name="latitude" id="lat" value=""><br>
+					URL: <br><select class="form-control" id="urls" name="url"><option type="radio" name="url" value="" selected="">--- Please Select URL From List ---</option><option type="radio" name="url" value="https://ancient-sierra-13275.herokuapp.com/images/itu.jpg">https://ancient-sierra-13275.herokuapp.com/images/itu.jpg</option><option type="radio" name="url" value="https://ancient-sierra-13275.herokuapp.com/images/ggbridge.jpg">https://ancient-sierra-13275.herokuapp.com/images/ggbridge.jpg</option><option type="radio" name="url" value="https://ancient-sierra-13275.herokuapp.com/images/stanford.jpg">https://ancient-sierra-13275.herokuapp.com/images/stanford.jpg</option><option type="radio" name="url" value="https://ancient-sierra-13275.herokuapp.com/images/pier39.jpg">https://ancient-sierra-13275.herokuapp.com/images/pier39.jpg</option><option type="radio" name="url" value="test done!!">test done!!</option><option type="radio" name="url" value="dsf">dsf</option><option type="radio" name="url" value="https://ancient-sierra-13275.herokuapp.com/images/pier39.jpg">https://ancient-sierra-13275.herokuapp.com/images/pier39.jpg</option></select><br>
+		    		<input class="btn btn-primary" type="submit" value="Add coordinate">
+				</form>
+    		</div>
+		</div>				
+		
+	</section>
+
+	<section id="database" class="home-section text-center bg-gray">
+		<div class="heading-about">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2">
+						<div class="wow bounceInDown animated" data-wow-delay="0.4s" style="visibility: visible;-webkit-animation-delay: 0.4s; -moz-animation-delay: 0.4s; animation-delay: 0.4s;">
+							<div class="section-heading">
+								<h2>Our Data</h2>
+								<i class="fa fa-2x fa-angle-down"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<table id="data" class="table table-hover"><tbody><tr><th>ID</th><th>Longitude</th><th>Latitude</th><th>URL</th><th></th><th></th></tr><tr><td>1</td><td>37.388767</td><td>-121.930889</td><td>https://ancient-sierra-13275.herokuapp.com/images/itu.jpg</td><td><a class="btn btn-primary btn-xs" href="http://localhost/ar-game/web/edit.php?id=1">Edit</a></td><td><form method="POST" action="http://localhost/ar-game/web/services/delete.php"><input type="hidden" name="id" value="1"><input class="btn btn-primary btn-xs" type="submit" value="Delete"></form></td></tr><tr><td>2</td><td>37.819929</td><td>-122.478255</td><td>https://ancient-sierra-13275.herokuapp.com/images/ggbridge.jpg</td><td><a class="btn btn-primary btn-xs" href="http://localhost/ar-game/web/edit.php?id=2">Edit</a></td><td><form method="POST" action="http://localhost/ar-game/web/services/delete.php"><input type="hidden" name="id" value="2"><input class="btn btn-primary btn-xs" type="submit" value="Delete"></form></td></tr><tr><td>3</td><td>37.4274745</td><td>-122.169718</td><td>https://ancient-sierra-13275.herokuapp.com/images/stanford.jpg</td><td><a class="btn btn-primary btn-xs" href="http://localhost/ar-game/web/edit.php?id=3">Edit</a></td><td><form method="POST" action="http://localhost/ar-game/web/services/delete.php"><input type="hidden" name="id" value="3"><input class="btn btn-primary btn-xs" type="submit" value="Delete"></form></td></tr><tr><td>4</td><td>37.810884</td><td>-122.4107869</td><td>https://ancient-sierra-13275.herokuapp.com/images/pier39.jpg</td><td><a class="btn btn-primary btn-xs" href="http://localhost/ar-game/web/edit.php?id=4">Edit</a></td><td><form method="POST" action="http://localhost/ar-game/web/services/delete.php"><input type="hidden" name="id" value="4"><input class="btn btn-primary btn-xs" type="submit" value="Delete"></form></td></tr><tr><td>5</td><td>123</td><td>-345789</td><td>test done!!</td><td><a class="btn btn-primary btn-xs" href="http://localhost/ar-game/web/edit.php?id=5">Edit</a></td><td><form method="POST" action="http://localhost/ar-game/web/services/delete.php"><input type="hidden" name="id" value="5"><input class="btn btn-primary btn-xs" type="submit" value="Delete"></form></td></tr><tr><td>9</td><td>23</td><td>sdf</td><td>dsf</td><td><a class="btn btn-primary btn-xs" href="http://localhost/ar-game/web/edit.php?id=9">Edit</a></td><td><form method="POST" action="http://localhost/ar-game/web/services/delete.php"><input type="hidden" name="id" value="9"><input class="btn btn-primary btn-xs" type="submit" value="Delete"></form></td></tr><tr><td>10</td><td>37.68382032669382</td><td>-121.728515625</td><td></td><td><a class="btn btn-primary btn-xs" href="http://localhost/ar-game/web/edit.php?id=10">Edit</a></td><td><form method="POST" action="http://localhost/ar-game/web/services/delete.php"><input type="hidden" name="id" value="10"><input class="btn btn-primary btn-xs" type="submit" value="Delete"></form></td></tr><tr><td>11</td><td>33.88865750124074</td><td>-116.1474609375</td><td></td><td><a class="btn btn-primary btn-xs" href="http://localhost/ar-game/web/edit.php?id=11">Edit</a></td><td><form method="POST" action="http://localhost/ar-game/web/services/delete.php"><input type="hidden" name="id" value="11"><input class="btn btn-primary btn-xs" type="submit" value="Delete"></form></td></tr><tr><td>13</td><td>37.74132291562885</td><td>-122.40700721740723</td><td>https://ancient-sierra-13275.herokuapp.com/images/pier39.jpg</td><td><a class="btn btn-primary btn-xs" href="http://localhost/ar-game/web/edit.php?id=13">Edit</a></td><td><form method="POST" action="http://localhost/ar-game/web/services/delete.php"><input type="hidden" name="id" value="13"><input class="btn btn-primary btn-xs" type="submit" value="Delete"></form></td></tr></tbody></table>
+			</div>
+        </div>
+	</section>
+
+	<script>
+		
+		function initMap() {
+			var marker;
+			var map = new google.maps.Map(document.getElementById('map'), {
+				center: {lat: 37.38, lng: -121.93},
+				zoom: 8
+			});
+			map.addListener('click', function(e) {
+				placeMarkerAndPanTo(e.latLng, map);
+				getpos(e.latLng);
+			});
+			function placeMarkerAndPanTo(latLng, map) {
+				if ( marker ) {
+					marker.setPosition(latLng);
+				} else {
+					marker = new google.maps.Marker({
+						position: latLng,
+						map: map
+					});
+					map.panTo(latLng);
+				}
+			}
+		}
+		function getpos(latLng){
+			document.getElementById("lng").value = latLng.lat();
+			document.getElementById("lat").value = latLng.lng();
+		}
+    </script>
+    <script async="" defer="" src="./Game Admin_files/js">
+    </script>
+    <!-- Core JavaScript Files -->
+    <script src="./Game Admin_files/jquery.min.js"></script>
+    <script src="./Game Admin_files/bootstrap.min.js"></script>
+    <script src="./Game Admin_files/jquery.easing.min.js"></script>	
+	<script src="./Game Admin_files/jquery.scrollTo.js"></script>
+	<script src="./Game Admin_files/wow.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="./Game Admin_files/custom.js"></script>
+    <script src="./Game Admin_files/contactform.js"></script>
+    
+
+
+
+</body></html>

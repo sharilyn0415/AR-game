@@ -6,7 +6,7 @@
 
 		if ($stmt->execute() == TRUE) {
 		    echo "This record has been deleted!";
-		    header( 'Location: ../admin.php' );
+		    header( 'Location: ../admin.php#database' );
 		} else {
 		    echo "Error: " . $sql . "<br>" . $conn->error;
 		}
