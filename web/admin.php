@@ -122,7 +122,7 @@
 		                    <div class="inner">
 								<h5>Sunyin Yao</h5>
 		                        <p class="subtitle">Backend Developer</p>
-		                        <div class="avatar"><img src="images/sunyin.jpg" alt="" class="img-responsive img-circle" /></div>
+		                        <div class="avatar"><img src="images/sunyin.JPG" alt="" class="img-responsive img-circle" /></div>
 
 		                    </div>
 		                </div>
