@@ -65,6 +65,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#addbymap">Add by map</a></li>
 		<li><a href="#database">Database</a></li>
+		<li><a href="#" onclick="alert('Coming Soon..')">Parent Control</a></li>
       </ul>
             </div>
         </div>
@@ -74,11 +75,6 @@
 		<div class="slogan">
 			<h2>Jewel Hunt</h2>
 			<h4>Cloud based Gaming App with Augmented Reality</h4>
-		</div>
-		<div class="page-scroll">
-			<a href="#addbymap" class="btn btn-circle">
-				<i class="fa fa-angle-double-down animated"></i>
-			</a>
 		</div>
     </section>
 
@@ -154,7 +150,7 @@
 		</div>
 	</section>
 			
-    <section id="addbymap" class="home-section text-center">
+    <section id="addbymap" class="home-section text-center" >
 		<div class="heading-contact">
 			<div class="container">
 				<div class="row">
@@ -181,13 +177,14 @@
 		    		Latitude: <input class="form-control" type="text" name="latitude" id="lat" value="" required/><br>
 					URL: <br><select class="form-control" id="urls" name="url" required></select><br>
 		    		<input class="btn btn-primary" type="submit" value="Add coordinate" />
+		    		<img src="" width="128" height="128" id="preview">
 				</form>
     		</div>
 		</div>				
 		
 	</section>
 
-	<section id="database" class="home-section text-center bg-gray">
+	<section id="database" class="home-section text-center">
 		<div class="heading-about">
 			<div class="container">
 				<div class="row">

@@ -351,11 +351,6 @@ hr {
 	text-shadow: -1px 1px 1px #000;
 }
 
-
-/* ===========================
---- About
-============================ */
-
 .boxed-grey {
 	background: #f9f9f9;
 	padding: 20px;
@@ -423,14 +418,16 @@ hr {
 .team-social .social-vimeo a:hover{background: #71c6f3;}
 
 
-/* ===========================
---- Services
-============================ */
 
 .service-icon {
 	margin-bottom: 20px;
 }	
-
+#database {
+    border: 10px solid transparent;
+    -webkit-border-image: url(../images/border.png) 30% round; /* Safari 3.1-5 */
+    -o-border-image: url(../images/border.png) 30% round; /* Opera 11-12.1 */
+    border-image: url(../images/border.png) 30% round;
+}
 
 /* ===========================
 --- Elements
