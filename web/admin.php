@@ -24,7 +24,7 @@
 						var res = "<th>There is No pre-set coordinates in DB!<th>";
 					} else {
 						var res = "<tr><th>ID</th><th>Longitude</th><th>Latitude</th><th>URL</th><th></th><th></th></tr>";
-						var urls ="<option type='radio' name='url' value='' selected>--- Please Select URL From List ---</option>"
+						var urls ="<option type='radio' name='url' value=''>--- Please Select URL From List ---</option>"
 						for(var i = 0; i < coordinates.length; i++) {
 							res += "<tr><td>"+coordinates[i].id+"</td><td>"+coordinates[i].longitude+"</td><td>"+coordinates[i].latitude+"</td><td>"+coordinates[i].url+"</td><td><a class='btn btn-primary btn-xs' href='edit.php?id="+coordinates[i].id+"'>Edit</a></td><td><form method='POST' action='services/delete.php'><input type='hidden' name='id' value="+coordinates[i].id+" /><input class='btn btn-primary btn-xs' type='submit' value='Delete' /></form></td></tr>";
 							if(coordinates[i].url != ""){
@@ -38,6 +38,10 @@
 			};
 			xhttp.open("GET", "services/admin.php", true);
 			xhttp.send();
+		}
+		function preview() {
+		    var src = document.getElementById("urls").value;
+		    document.getElementById("preview").innerHTML = "URL Preview: <br> <img src='"+src+"' width='128' height='128'><br>"
 		}
 	</script>  
 </head>
@@ -55,7 +59,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="admin.php">
-                    <h1>Jewel Hunt -“Try your luck !”</h1>
+                    <h1>Personalize Your Game</h1>
                 </a>
             </div>
 
@@ -71,9 +75,9 @@
         </div>
     </nav>
 
-    <section id="intro" class="intro" style="background">
+    <section id="intro" class="intro">
 		<div class="slogan">
-			<h2>Jewel Hunt</h2>
+			<h2>Multi-Player Platform</h2>
 			<h4>Cloud based Gaming App with Augmented Reality</h4>
 		</div>
     </section>
@@ -106,7 +110,7 @@
 		                <div class="team boxed-grey">
 		                    <div class="inner">
 								<h5>Monika Khanna</h5>
-		                        <p class="subtitle">IOS Developer</p>
+		                        <p class="subtitle">iOS Developer</p>
 		                        <div class="avatar"><img src="images/monika.jpg" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
@@ -130,7 +134,7 @@
 		                    <div class="inner">
 								<h5>Madhukarreddy Komalla</h5>
 		                        <p class="subtitle">Android Developer</p>
-		                        <div class="avatar"><img src="images/madhu.jpg" alt="" class="img-responsive img-circle" /></div>
+		                        <div class="avatar"><img src="images/maduka.png" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
 					</div>
@@ -141,7 +145,7 @@
 		                    <div class="inner">
 								<h5>Teng Wang</h5>
 		                        <p class="subtitle">Project Manager</p>
-		                        <div class="avatar"><img src="images/teng.jpg" alt="" class="img-responsive img-circle" /></div>
+		                        <div class="avatar"><img src="images/teng.png" alt="" class="img-responsive img-circle" /></div>
 		                    </div>
 		                </div>
 					</div>
@@ -175,9 +179,9 @@
 			    	<h3>Your Select location</h3>
 		    		Longitude: <input class="form-control" type="text" name="longitude" id="lng" value="" required/><br>
 		    		Latitude: <input class="form-control" type="text" name="latitude" id="lat" value="" required/><br>
-					URL: <br><select class="form-control" id="urls" name="url" required></select><br>
+					URL: <br><select class="form-control" id="urls" name="url" onchange="preview(this.value)" required></select><br>
+		    		<span id="preview"></span> <br>
 		    		<input class="btn btn-primary" type="submit" value="Add coordinate" />
-		    		<img src="" width="128" height="128" id="preview">
 				</form>
     		</div>
 		</div>				
@@ -207,7 +211,6 @@
 	</section>
 
 	<script>
-		
 		function initMap() {
 			var marker;
 			var map = new google.maps.Map(document.getElementById('map'), {
@@ -234,7 +237,6 @@
 			document.getElementById("lng").value = latLng.lat();
 			document.getElementById("lat").value = latLng.lng();
 		}
-
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXsU_l9Q1xQcn9iiihwYabCuj2UYBxwnc&callback=initMap">
