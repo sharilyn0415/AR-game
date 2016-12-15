@@ -18,6 +18,7 @@
 		Longitude: <input class="form-control" type="text" name="longitude" value="<?php echo $res['longitude'] ?>" />
 		Latitude: <input class="form-control" type="text" name="latitude" value="<?php echo $res['latitude'] ?>" />
 		URL: <input class="form-control" type="text" name="url" value="<?php echo $res['url'] ?>" />
+		Type: <input class="form-control" type="text" name="type" value="<?php echo $res['type'] ?>" />
 		<input class="btn btn-primary" type="submit" value="Submit">
 	</form>
 		

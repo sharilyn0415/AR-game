@@ -23,10 +23,10 @@
 					if(coordinates.length == 0) {
 						var res = "<th>There is No pre-set coordinates in DB!<th>";
 					} else {
-						var res = "<tr><th>ID</th><th>Longitude</th><th>Latitude</th><th>URL</th><th></th><th></th></tr>";
+						var res = "<tr><th>ID</th><th>Longitude</th><th>Latitude</th><th>URL</th><th>Type</th><th></th><th></th></tr>";
 						var urls ="<option type='radio' name='url' value=''>--- Please Select URL From List ---</option>"
 						for(var i = 0; i < coordinates.length; i++) {
-							res += "<tr><td>"+coordinates[i].id+"</td><td>"+coordinates[i].longitude+"</td><td>"+coordinates[i].latitude+"</td><td>"+coordinates[i].url+"</td><td><a class='btn btn-primary btn-xs' href='edit.php?id="+coordinates[i].id+"'>Edit</a></td><td><form method='POST' action='services/delete.php'><input type='hidden' name='id' value="+coordinates[i].id+" /><input class='btn btn-primary btn-xs' type='submit' value='Delete' /></form></td></tr>";
+							res += "<tr><td>"+coordinates[i].id+"</td><td>"+coordinates[i].longitude+"</td><td>"+coordinates[i].latitude+"</td><td>"+coordinates[i].url+"</td><td>"+coordinates[i].type+"</td><td><a class='btn btn-primary btn-xs' href='edit.php?id="+coordinates[i].id+"'>Edit</a></td><td><form method='POST' action='services/delete.php'><input type='hidden' name='id' value="+coordinates[i].id+" /><input class='btn btn-primary btn-xs' type='submit' value='Delete' /></form></td></tr>";
 							if(coordinates[i].url != ""){
 								urls +="<option type='radio' name='url' value='"+coordinates[i].url+"' >"+coordinates[i].url+"</option><br>"
 							}
@@ -180,6 +180,12 @@
 		    		Longitude: <input class="form-control" type="text" name="longitude" id="lng" value="" required/><br>
 		    		Latitude: <input class="form-control" type="text" name="latitude" id="lat" value="" required/><br>
 					URL: <br><select class="form-control" id="urls" name="url" onchange="preview(this.value)" required></select><br>
+					Type: <select class="form-control" name="type"  required>
+							<option name="type" value ="">--Please select your URL type--</option>
+							<option name="type" value ="text">Text</option>
+							<option name="type" value ="image">Image</option>
+							<option name="type" value="video">Video</option>
+						  </select><br>
 		    		<span id="preview"></span> <br>
 		    		<input class="btn btn-primary" type="submit" value="Add coordinate" />
 				</form>

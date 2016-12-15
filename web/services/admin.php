@@ -2,7 +2,7 @@
 	include('../header.php');
 
 	$resArray = array();
-	$sql_select = "SELECT id, longitude, latitude, url FROM locations;";
+	$sql_select = "SELECT id, longitude, latitude, url,type FROM locations;";
 	$result = $conn->query($sql_select);
 	if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
