@@ -38,6 +38,7 @@ $sql = "SELECT * FROM locations";
 $res = [];
 $res['status'] = '0';
 $res['url'] = '';
+$res['type'] = '';
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -45,9 +46,11 @@ if ($result->num_rows > 0) {
         if (distance(floatval($latitude), floatval($longitude), floatval($row["latitude"]), floatval($row["longitude"]), 'M') < 0.01) {
             $res['status'] = '1';
             $res['url'] = $row["url"];
+            $res['type'] = $row["type"]
             break;
         } elseif (distance(floatval($latitude), floatval($longitude), floatval($row["latitude"]), floatval($row["longitude"]), 'M') < 0.1) {
             $res['status'] = '2';
+            $res['type'] = $row["type"]
             break;
         }
     }
